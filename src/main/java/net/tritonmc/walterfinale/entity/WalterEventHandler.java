@@ -6,6 +6,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
 import net.tritonmc.walterfinale.WalterFinale;
 import net.tritonmc.walterfinale.mixin.MobGoalsAccessor;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Optional;
 import java.util.function.BiConsumer;
@@ -19,7 +20,7 @@ public class WalterEventHandler implements ServerEntityEvents.Load {
     }
 
     @Override
-    public void onLoad(Entity entity, ServerLevel level)
+    public void onLoad(Entity entity, @NonNull ServerLevel level)
     {
         if (!entity.entityTags().contains(WalterFinale.MOD_ID) || !(entity instanceof Mob mob))
         {

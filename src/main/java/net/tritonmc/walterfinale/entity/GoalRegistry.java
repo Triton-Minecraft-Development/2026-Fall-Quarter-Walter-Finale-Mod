@@ -60,7 +60,7 @@ public class GoalRegistry {
             goals.addGoal(3, new LookAtPlayerGoal(golem, ServerPlayer.class, 6.0f));
             goals.addGoal(4, new RandomLookAroundGoal(golem));
 
-            targetGoals.addGoal(1, new HurtByTargetGoal(golem).setAlertOthers(SnowGolem.class));
+            targetGoals.addGoal(1, new HurtByTargetGoal(golem, SnowGolem.class).setAlertOthers(SnowGolem.class));
             targetGoals.addGoal(2, new NearestAttackableTargetGoal<>(golem, ServerPlayer.class, false));
         });
 
