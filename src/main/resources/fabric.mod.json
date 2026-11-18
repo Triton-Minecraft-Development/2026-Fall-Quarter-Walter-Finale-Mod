@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "walter_finale",
+  "version": "${version}",
+  "name": "Walter Finale",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/walter_finale/icon.png",
+  "accessWidener": "walter_finale.accesswidener",
+  "environment": "server",
+  "entrypoints": {
+    "main": [
+      "net.tritonmc.walterfinale.WalterFinale"
+    ]
+  },
+  "mixins": [
+    "walter_finale.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
