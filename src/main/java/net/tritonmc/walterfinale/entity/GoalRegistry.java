@@ -8,6 +8,7 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.golem.SnowGolem;
+import net.tritonmc.walterfinale.entity.pathfind.MarkerPathfinder;
 import net.tritonmc.walterfinale.mixin.MobGoalsAccessor;
 import org.apache.commons.lang3.function.Predicates;
 
@@ -55,7 +56,8 @@ public class GoalRegistry {
             goals.removeAllGoals(Predicates.truePredicate());
             targetGoals.removeAllGoals(Predicates.truePredicate());
 
-            goals.addGoal(1, new RangedAttackGoal(golem, 1.25, 10, 15f));
+            goals.addGoal(0, new MarkerPathfinder(golem, 1.25f));
+            goals.addGoal(1, new RangedAttackGoal(golem, 1.25f, 10, 15f));
             goals.addGoal(2, new WaterAvoidingRandomStrollGoal(golem, 1.0, 1.0000001E-5f));
             goals.addGoal(3, new LookAtPlayerGoal(golem, ServerPlayer.class, 6.0f));
             goals.addGoal(4, new RandomLookAroundGoal(golem));
@@ -73,6 +75,7 @@ public class GoalRegistry {
             targetGoals.removeAllGoals(Predicates.truePredicate());
 
             goalSelector.addGoal(0, new FloatGoal(polarBear));
+            goalSelector.addGoal(0, new MarkerPathfinder(polarBear, 1.25f));
             goalSelector.addGoal(1, polarBear.new PolarBearMeleeAttackGoal());
             goalSelector.addGoal(2, new LookAtPlayerGoal(polarBear, ServerPlayer.class, 6.0f));
             goalSelector.addGoal(3, new RandomLookAroundGoal(polarBear));
