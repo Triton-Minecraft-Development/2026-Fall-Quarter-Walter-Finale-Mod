@@ -66,33 +66,9 @@ public abstract class EntityMixin {
             {
                 marker.remove(Entity.RemovalReason.DISCARDED);
             });
-//            Vec3 entityPos = entity.position();
-//            WaveMarkerManager.saveWavePosition(entityPos, serverLevel);
 
         }
 
     }
 
-//    @Inject(method = "remove", at = @At("TAIL"))
-//    private void remove(Entity.RemovalReason reason, CallbackInfo ci)
-//    {
-//        Entity entity = (Entity) (Object) this;
-//        if (!(entity instanceof Marker))
-//        {
-//            return;
-//        }
-//        if (entity.level().isClientSide() || !(entity.level() instanceof ServerLevel level))
-//        {
-//            return;
-//        }
-//        List<? extends Marker> remaining = level.getEntities(EntityTypes.MARKER, WaveMarkerManager::hasTag);
-//        if (remaining.isEmpty())
-//        {
-//            WaveMarkerManager.saveWavePosition(null, level);
-//        } else
-//        {
-//            Vec3 remainingPos = remaining.getFirst().position();
-//            WaveMarkerManager.saveWavePosition(remainingPos, level);
-//        }
-//    }
 }
