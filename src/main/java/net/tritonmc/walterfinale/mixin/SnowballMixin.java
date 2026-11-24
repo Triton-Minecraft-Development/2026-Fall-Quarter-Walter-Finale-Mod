@@ -6,6 +6,7 @@ import net.minecraft.world.entity.animal.golem.SnowGolem;
 import net.minecraft.world.entity.monster.Blaze;
 import net.minecraft.world.entity.projectile.throwableitemprojectile.Snowball;
 import net.minecraft.world.phys.EntityHitResult;
+import net.tritonmc.walterfinale.WalterFinale;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -32,7 +33,11 @@ public abstract class SnowballMixin {
         {
             return;
         }
-        if (!(snowball.getOwner() instanceof SnowGolem))
+        if (!(snowball.getOwner() instanceof SnowGolem snowGolem))
+        {
+            return;
+        }
+        if (!snowGolem.entityTags().contains(WalterFinale.MOD_ID))
         {
             return;
         }

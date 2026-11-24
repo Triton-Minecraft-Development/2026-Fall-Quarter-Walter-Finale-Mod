@@ -7,6 +7,7 @@ import net.minecraft.world.phys.Vec3;
 import net.tritonmc.walterfinale.WalterFinale;
 import net.tritonmc.walterfinale.entity.GoalRegistry;
 import net.tritonmc.walterfinale.entity.WaveMarkerManager;
+import net.tritonmc.walterfinale.entity.pathfind.MarkerPathfinder;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -50,16 +51,18 @@ public abstract class EntityMixin {
             Optional<BiConsumer<? extends Mob, MobGoalsAccessor>> op = GoalRegistry.get(mob.getType());
             if (op.isEmpty())
             {
+                MobGoalsAccessor goalsAccessor = (MobGoalsAccessor) mob;
+                goalsAccessor.goalSelector().addGoal(0, new MarkerPathfinder(mob, 1.25f));
                 return;
             }
             GoalRegistry.acceptMob(mob, op.get());
         }
         else if (tag.equals(WaveMarkerManager.MARKER_ID) && level instanceof ServerLevel serverLevel)
         {
-            // Armor stands marked with the "wave_marker" tag will mark the
+            // Markers marked with the "wave_marker" tag will mark the
             // position for wave mobs to converge in on.
 
-            // All previous armor stands used for marking
+            // All previous markers used for marking
             // wave positions will be overridden and removed
 
             serverLevel.getEntities(EntityTypes.MARKER, this::isValidRemovableMarker).forEach(marker ->

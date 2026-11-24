@@ -5,6 +5,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
 import net.tritonmc.walterfinale.WalterFinale;
+import net.tritonmc.walterfinale.entity.pathfind.MarkerPathfinder;
 import net.tritonmc.walterfinale.mixin.MobGoalsAccessor;
 import org.jspecify.annotations.NonNull;
 
@@ -30,6 +31,8 @@ public class WalterEventHandler implements ServerEntityEvents.Load {
         Optional<BiConsumer<? extends Mob, MobGoalsAccessor>> op = GoalRegistry.get(mob.getType());
         if (op.isEmpty())
         {
+            MobGoalsAccessor goalsAccessor = (MobGoalsAccessor) mob;
+            goalsAccessor.goalSelector().addGoal(0, new MarkerPathfinder(mob, 1.25f));
             return;
         }
         GoalRegistry.acceptMob(mob, op.get());

@@ -25,11 +25,14 @@ public class GoalRegistry {
         REGISTRY.put(entityType, consumer);
     }
 
-    public static <T extends Mob> void acceptMob(Mob mob, BiConsumer<T, MobGoalsAccessor> consumer)
+    public static <T extends Mob> void acceptMob(Mob mob, BiConsumer<T, MobGoalsAccessor> forPresent)
     {
         @SuppressWarnings("unchecked")
         T typedMob = (T) mob;
-        consumer.accept(typedMob, (MobGoalsAccessor) mob);
+        if (REGISTRY.get(typedMob.getType()) != null && REGISTRY.containsKey(typedMob.getType()))
+        {
+            forPresent.accept(typedMob, (MobGoalsAccessor) mob);
+        }
     }
 
     public static Optional<BiConsumer<? extends Mob, MobGoalsAccessor>> get(EntityType<?> entityType)
